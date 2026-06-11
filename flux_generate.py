@@ -50,11 +50,12 @@ LOG_PATH = OUTPUT_DIR / "generation_log.json"
 PROMPT_TEMPLATE = (
     "professional product photography of {item}, "
     "isolated on pure white seamless background, soft studio lighting, "
-    "sharp focus, high detail, photorealistic, no text, no watermark"
+    "sharp focus, high detail, photorealistic, "
+    "no text, no watermark, no logos, no engraved lettering"
 )
 
 EQUIPMENT = [
-    (1,  "v60",          "a white ceramic V60-style conical pour-over coffee dripper with spiral ribs"),
+    (1,  "v60",          "a plain white ceramic conical pour-over coffee dripper with spiral interior ribs, a single one-piece molded ceramic body where the cone and the base stand are seamlessly integrated as one continuous piece, smooth unmarked surface"),
     (2,  "chemex",       "an hourglass-shaped glass pour-over coffee maker with wooden collar and leather tie"),
     (3,  "french_press", "a glass french press coffee maker with stainless steel frame and plunger"),
     (4,  "aeropress",    "a plastic AeroPress-style manual coffee press with plunger and filter cap"),
