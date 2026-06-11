@@ -75,6 +75,9 @@ EQUIPMENT = [
     (8,  "nel_drip",     "a Japanese nel drip coffee filter, a natural cream-colored cotton flannel cloth bag whose wide round mouth is held open by a thin circular metal wire ring, the soft cloth tapering down to a gently pointed rounded bottom with visible stitched side seams, attached by a metal wire to a wooden handle"),
     (9,  "cold_brew",    "a glass cold brew coffee pot with fine mesh strainer column"),
     (10, "ibrik",        "a traditional hammered copper cezve ibrik turkish coffee pot with long brass handle"),
+    (11, "beans_dark",   "a generous heaped mound of dark-roast coffee beans, very dark brown almost black with a glossy oily sheen, piled into a small mountain on a clean white countertop"),
+    (12, "beans_medium", "a generous heaped mound of medium-roast coffee beans, rich even medium brown with a smooth matte surface, piled into a small mountain on a clean white countertop"),
+    (13, "beans_light",  "a generous heaped mound of light-roast coffee beans, pale cinnamon light brown and dry, piled into a small mountain on a clean white countertop"),
 ]
 
 
