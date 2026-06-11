@@ -79,6 +79,9 @@ EQUIPMENT = [
     (12, "beans_medium", "a generous heaped mound of medium-roast coffee beans, rich even medium brown with a smooth matte surface, piled into a small mountain on a clean white countertop"),
     (13, "beans_light",  "a generous heaped mound of light-roast coffee beans, pale cinnamon light brown and dry, piled into a small mountain on a clean white countertop"),
     (14, "beans_peaberry", "a generous heaped mound of roasted peaberry coffee beans, small rounded pea-shaped single beans with a smooth oval form (not the usual flat-sided beans), medium-roast brown, piled into a small mountain on a clean white countertop"),
+    (15, "ground_dark",   "a generous heaped mound of finely ground coffee from dark-roast beans, very dark brown almost black powder with a slightly oily texture, piled into a small mound on a clean white countertop"),
+    (16, "ground_medium", "a generous heaped mound of finely ground coffee from medium-roast beans, rich even medium brown ground powder, piled into a small mound on a clean white countertop"),
+    (17, "ground_light",  "a generous heaped mound of finely ground coffee from light-roast beans, pale cinnamon light brown dry ground powder, piled into a small mound on a clean white countertop"),
 ]
 
 
