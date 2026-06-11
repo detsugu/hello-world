@@ -54,6 +54,16 @@ PROMPT_TEMPLATE = (
     "no text, no watermark, no logos, no engraved lettering"
 )
 
+# 参照画像(--ref)を渡したときのプロンプト。image 1 の形状に忠実に寄せる。
+REF_PROMPT_TEMPLATE = (
+    "professional product photography of {item}, "
+    "faithfully matching the exact shape, structure and proportions of "
+    "the coffee equipment shown in image 1, "
+    "isolated on pure white seamless background, soft studio lighting, "
+    "sharp focus, high detail, photorealistic, "
+    "no text, no watermark, no logos, no engraved lettering"
+)
+
 EQUIPMENT = [
     (1,  "v60",          "a plain white ceramic conical pour-over coffee dripper with spiral interior ribs and a curved side handle, a single one-piece molded ceramic body where the cone and the base stand are seamlessly integrated as one continuous piece, smooth unmarked surface"),
     (2,  "chemex",       "an hourglass-shaped glass pour-over coffee maker with wooden collar and leather tie"),
@@ -68,7 +78,13 @@ EQUIPMENT = [
 ]
 
 
-def submit(session: requests.Session, api_key: str, prompt: str, seed: int | None) -> dict:
+def submit(
+    session: requests.Session,
+    api_key: str,
+    prompt: str,
+    seed: int | None,
+    input_image: str | None = None,
+) -> dict:
     """生成リクエストを投げて {id, polling_url} を返す。"""
     payload = {
         "prompt": prompt,
@@ -78,6 +94,9 @@ def submit(session: requests.Session, api_key: str, prompt: str, seed: int | Non
     }
     if seed is not None:
         payload["seed"] = seed
+    if input_image is not None:
+        # FLUX.2 は input_image(URL または base64)で参照画像を受け付ける。
+        payload["input_image"] = input_image
     resp = session.post(
         f"{API_BASE}/{MODEL_ENDPOINT}",
         headers={"x-key": api_key, "Content-Type": "application/json"},
@@ -129,12 +148,23 @@ def main() -> int:
     parser.add_argument("--only", type=int, help="指定番号の器具のみ生成")
     parser.add_argument("--test", action="store_true", help="先頭1件のみテスト生成")
     parser.add_argument("--seed", type=int, default=None, help="seed固定(再現/微調整用)")
+    parser.add_argument("--ref", type=str, default=None,
+                        help="参照画像のパス。形状を寄せたい器具に(--only と併用推奨)")
     args = parser.parse_args()
 
     api_key = os.environ.get("BFL_API_KEY")
     if not api_key:
         print("環境変数 BFL_API_KEY を設定してください", file=sys.stderr)
         return 1
+
+    ref_image = None
+    if args.ref:
+        ref_path = Path(args.ref).expanduser()
+        if not ref_path.is_file():
+            print(f"参照画像が見つかりません: {ref_path}", file=sys.stderr)
+            return 1
+        ref_image = base64.b64encode(ref_path.read_bytes()).decode("ascii")
+        print(f"参照画像を使用: {ref_path}")
 
     targets = EQUIPMENT
     if args.only:
@@ -150,11 +180,12 @@ def main() -> int:
 
     session = requests.Session()
     for num, slug, item in targets:
-        prompt = PROMPT_TEMPLATE.format(item=item)
+        template = REF_PROMPT_TEMPLATE if ref_image else PROMPT_TEMPLATE
+        prompt = template.format(item=item)
         out_path = OUTPUT_DIR / f"{num:02d}_{slug}.png"
         print(f"[{num:02d}] {slug} を生成中...")
         try:
-            task = submit(session, api_key, prompt, args.seed)
+            task = submit(session, api_key, prompt, args.seed, ref_image)
             result = poll(session, api_key, task)
             save_image(session, result["sample"], out_path)
             print(f"  -> 保存: {out_path}")
