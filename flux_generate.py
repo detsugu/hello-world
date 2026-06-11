@@ -57,8 +57,8 @@ PROMPT_TEMPLATE = (
 # 参照画像(--ref)を渡したときのプロンプト。image 1 の形状に忠実に寄せる。
 REF_PROMPT_TEMPLATE = (
     "professional product photography of {item}, "
-    "faithfully matching the exact shape, structure, material and "
-    "proportions of the coffee equipment shown in the reference images, "
+    "faithfully matching the exact shape, structure, material, texture and "
+    "proportions of the subject shown in the reference images, "
     "isolated on pure white seamless background, soft studio lighting, "
     "sharp focus, high detail, photorealistic, "
     "no text, no watermark, no logos, no engraved lettering"
@@ -80,8 +80,8 @@ EQUIPMENT = [
     (13, "beans_light",  "a generous heaped mound of light-roast coffee beans, pale cinnamon light brown and dry, piled into a small mountain on a clean white countertop"),
     (14, "beans_peaberry", "a generous heaped mound of roasted peaberry coffee beans, small rounded pea-shaped single beans with a smooth oval form (not the usual flat-sided beans), medium-roast brown, piled into a small mountain on a clean white countertop"),
     (15, "ground_dark",   "a generous heaped mound of finely ground coffee from dark-roast beans, very dark brown almost black powder with a slightly oily texture, piled into a small mound on a clean white countertop"),
-    (16, "ground_medium", "a generous heaped mound of ground coffee from medium-roast beans, evenly ground into small granules of fairly uniform consistent size like coarse sand or coarse sugar (small rounded grains, only slight size variation, NOT long thin slivers, NOT elongated wood-shaving shapes, not sawdust); the grains share a uniform grind size while showing a mottled two-tone color where the darker bean granules and the lighter pale chaff and husk flecks differ slightly in shade, overall a warm milk-chocolate tan-brown, piled into a small mound on a clean white countertop"),
-    (17, "ground_light",  "a generous heaped mound of ground coffee from light-roast beans, evenly ground into small granules of fairly uniform consistent size like coarse sand (small rounded grains, only slight size variation, NOT long thin slivers, NOT elongated wood-shaving shapes, not sawdust); the grains share a uniform grind size while showing a mottled speckled color with pale cream chaff and husk flecks scattered among the bean granules in slightly different shades, overall a pale cinnamon light tan, piled into a small mound on a clean white countertop"),
+    (16, "ground_medium", "a heaped mound of medium-roast ground coffee, warm milk-chocolate tan-brown, on a clean white countertop"),
+    (17, "ground_light",  "a heaped mound of light-roast ground coffee, pale cinnamon light tan, on a clean white countertop"),
 ]
 
 
