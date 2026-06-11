@@ -80,8 +80,8 @@ EQUIPMENT = [
     (13, "beans_light",  "a generous heaped mound of light-roast coffee beans, pale cinnamon light brown and dry, piled into a small mountain on a clean white countertop"),
     (14, "beans_peaberry", "a generous heaped mound of roasted peaberry coffee beans, small rounded pea-shaped single beans with a smooth oval form (not the usual flat-sided beans), medium-roast brown, piled into a small mountain on a clean white countertop"),
     (15, "ground_dark",   "a generous heaped mound of finely ground coffee from dark-roast beans, very dark brown almost black powder with a slightly oily texture, piled into a small mound on a clean white countertop"),
-    (16, "ground_medium", "a generous heaped mound of finely ground coffee from medium-roast beans, warm medium tan-brown powder the color of milk chocolate or caramel, clearly lighter than dark roast, uniform fine grounds, piled into a small mound on a clean white countertop"),
-    (17, "ground_light",  "a generous heaped mound of finely ground coffee from light-roast beans, pale light tan powder the color of cinnamon and light milk chocolate, distinctly pale and dry, much lighter than medium roast, uniform fine grounds, piled into a small mound on a clean white countertop"),
+    (16, "ground_medium", "a generous heaped mound of ground coffee from medium-roast beans, warm medium tan-brown the color of milk chocolate or caramel, clearly lighter than dark roast; a grainy granular texture with many visible distinct grains and granules because the harder medium-roast beans do not crush into a fine powder, piled into a small mound on a clean white countertop"),
+    (17, "ground_light",  "a generous heaped mound of ground coffee from light-roast beans, pale light tan the color of cinnamon and light milk chocolate, distinctly pale and dry; a coarse gritty granular texture with clearly visible individual grains and small angular bean fragments because the hard light-roast beans barely break down into powder, piled into a small mound on a clean white countertop"),
 ]
 
 
