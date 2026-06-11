@@ -55,14 +55,14 @@ PROMPT_TEMPLATE = (
 )
 
 EQUIPMENT = [
-    (1,  "v60",          "a plain white ceramic conical pour-over coffee dripper with spiral interior ribs, a single one-piece molded ceramic body where the cone and the base stand are seamlessly integrated as one continuous piece, smooth unmarked surface"),
+    (1,  "v60",          "a plain white ceramic conical pour-over coffee dripper with spiral interior ribs and a curved side handle, a single one-piece molded ceramic body where the cone and the base stand are seamlessly integrated as one continuous piece, smooth unmarked surface"),
     (2,  "chemex",       "an hourglass-shaped glass pour-over coffee maker with wooden collar and leather tie"),
     (3,  "french_press", "a glass french press coffee maker with stainless steel frame and plunger"),
     (4,  "aeropress",    "a plastic AeroPress-style manual coffee press with plunger and filter cap"),
     (5,  "siphon",       "a two-cup glass siphon vacuum coffee brewer with alcohol burner and stand"),
     (6,  "moka_pot",     "a classic aluminum stovetop moka pot espresso maker, octagonal shape"),
     (7,  "kalita_wave",  "a stainless steel flat-bottom wave-style coffee dripper"),
-    (8,  "nel_drip",     "a cloth flannel coffee drip filter with wooden handle, Japanese nel drip style"),
+    (8,  "nel_drip",     "a Japanese nel drip coffee filter: a soft flannel cloth filter bag shaped as a deep rounded cone with a smoothly curved round bottom (not a sharp triangular pyramid), the cloth mouth stretched over a circular metal hoop ring attached to a wooden handle"),
     (9,  "cold_brew",    "a glass cold brew coffee pot with fine mesh strainer column"),
     (10, "ibrik",        "a traditional hammered copper cezve ibrik turkish coffee pot with long brass handle"),
 ]
