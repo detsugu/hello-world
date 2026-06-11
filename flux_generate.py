@@ -57,8 +57,8 @@ PROMPT_TEMPLATE = (
 # 参照画像(--ref)を渡したときのプロンプト。image 1 の形状に忠実に寄せる。
 REF_PROMPT_TEMPLATE = (
     "professional product photography of {item}, "
-    "faithfully matching the exact shape, structure and proportions of "
-    "the coffee equipment shown in image 1, "
+    "faithfully matching the exact shape, structure, material and "
+    "proportions of the coffee equipment shown in the reference images, "
     "isolated on pure white seamless background, soft studio lighting, "
     "sharp focus, high detail, photorealistic, "
     "no text, no watermark, no logos, no engraved lettering"
@@ -72,7 +72,7 @@ EQUIPMENT = [
     (5,  "siphon",       "a two-cup glass siphon vacuum coffee brewer with alcohol burner and stand"),
     (6,  "moka_pot",     "a classic aluminum stovetop moka pot espresso maker, octagonal shape"),
     (7,  "kalita_wave",  "a stainless steel flat-bottom wave-style coffee dripper"),
-    (8,  "nel_drip",     "a Japanese nel drip coffee filter: a soft flannel cloth filter bag shaped as a deep rounded cone with a smoothly curved round bottom (not a sharp triangular pyramid), the cloth mouth stretched over a circular metal hoop ring attached to a wooden handle"),
+    (8,  "nel_drip",     "a Japanese nel drip coffee filter, a natural cream-colored cotton flannel cloth bag whose wide round mouth is held open by a thin circular metal wire ring, the soft cloth tapering down to a gently pointed rounded bottom with visible stitched side seams, attached by a metal wire to a wooden handle"),
     (9,  "cold_brew",    "a glass cold brew coffee pot with fine mesh strainer column"),
     (10, "ibrik",        "a traditional hammered copper cezve ibrik turkish coffee pot with long brass handle"),
 ]
@@ -83,7 +83,7 @@ def submit(
     api_key: str,
     prompt: str,
     seed: int | None,
-    input_image: str | None = None,
+    input_images: list[str] | None = None,
 ) -> dict:
     """生成リクエストを投げて {id, polling_url} を返す。"""
     payload = {
@@ -94,9 +94,12 @@ def submit(
     }
     if seed is not None:
         payload["seed"] = seed
-    if input_image is not None:
-        # FLUX.2 は input_image(URL または base64)で参照画像を受け付ける。
-        payload["input_image"] = input_image
+    if input_images:
+        # FLUX.2 は input_image / input_image_2..8(URL または base64)で
+        # 最大8枚の参照画像を受け付ける。
+        for idx, img in enumerate(input_images[:8]):
+            key = "input_image" if idx == 0 else f"input_image_{idx + 1}"
+            payload[key] = img
     resp = session.post(
         f"{API_BASE}/{MODEL_ENDPOINT}",
         headers={"x-key": api_key, "Content-Type": "application/json"},
@@ -148,8 +151,8 @@ def main() -> int:
     parser.add_argument("--only", type=int, help="指定番号の器具のみ生成")
     parser.add_argument("--test", action="store_true", help="先頭1件のみテスト生成")
     parser.add_argument("--seed", type=int, default=None, help="seed固定(再現/微調整用)")
-    parser.add_argument("--ref", type=str, default=None,
-                        help="参照画像のパス。形状を寄せたい器具に(--only と併用推奨)")
+    parser.add_argument("--ref", type=str, action="append", default=None,
+                        help="参照画像のパス。複数回指定可(最大8枚)。--only と併用推奨")
     args = parser.parse_args()
 
     api_key = os.environ.get("BFL_API_KEY")
@@ -157,14 +160,16 @@ def main() -> int:
         print("環境変数 BFL_API_KEY を設定してください", file=sys.stderr)
         return 1
 
-    ref_image = None
+    ref_images = None
     if args.ref:
-        ref_path = Path(args.ref).expanduser()
-        if not ref_path.is_file():
-            print(f"参照画像が見つかりません: {ref_path}", file=sys.stderr)
-            return 1
-        ref_image = base64.b64encode(ref_path.read_bytes()).decode("ascii")
-        print(f"参照画像を使用: {ref_path}")
+        ref_images = []
+        for r in args.ref:
+            ref_path = Path(r).expanduser()
+            if not ref_path.is_file():
+                print(f"参照画像が見つかりません: {ref_path}", file=sys.stderr)
+                return 1
+            ref_images.append(base64.b64encode(ref_path.read_bytes()).decode("ascii"))
+            print(f"参照画像を使用: {ref_path}")
 
     targets = EQUIPMENT
     if args.only:
@@ -180,12 +185,12 @@ def main() -> int:
 
     session = requests.Session()
     for num, slug, item in targets:
-        template = REF_PROMPT_TEMPLATE if ref_image else PROMPT_TEMPLATE
+        template = REF_PROMPT_TEMPLATE if ref_images else PROMPT_TEMPLATE
         prompt = template.format(item=item)
         out_path = OUTPUT_DIR / f"{num:02d}_{slug}.png"
         print(f"[{num:02d}] {slug} を生成中...")
         try:
-            task = submit(session, api_key, prompt, args.seed, ref_image)
+            task = submit(session, api_key, prompt, args.seed, ref_images)
             result = poll(session, api_key, task)
             save_image(session, result["sample"], out_path)
             print(f"  -> 保存: {out_path}")
