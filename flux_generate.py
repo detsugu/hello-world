@@ -21,6 +21,8 @@ API仕様(2026年6月時点、https://docs.bfl.ai で確認済み):
   - 結果URLは約10分で失効するため、Ready 後すぐにダウンロードする。
 """
 
+from __future__ import annotations  # Python 3.9 互換(int | None 等の遅延評価)
+
 import argparse
 import base64
 import json
