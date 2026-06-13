@@ -95,7 +95,7 @@ EQUIPMENT = [
     (20, "paper_filter",     "a neat stack of round fluted wavy-walled paper coffee filters in the Kalita wave style, each filter a flat-bottom cup with evenly corrugated pleated rippling sidewalls, unbleached off-white paper, several filters nested together; just the bare stack of fluted filters alone, with no outer paper wrapper, sleeve or cone wrapped around them"),
     # --- 追加(今回作成): エスプレッソ系(3点) ---
     (21, "espresso_machine",   "a home semi-automatic espresso machine with a portafilter attached"),
-    (22, "portable_espresso",  "a compact handheld manual portable espresso maker, hand-press type"),
+    (22, "portable_espresso",  "a compact handheld portable espresso maker shaped like a sleek slim cylindrical bottle or flask, smooth clean minimal one-piece body with a small cap or button on top, held and operated in one hand, no protruding levers, valves, pipes or visible machinery, a tidy modern travel gadget shown standing upright"),
     (23, "tamper",             "an espresso coffee tamper, a flat metal disc with a rounded handle"),
     # --- 追加(今回作成): 保存・その他(2点) ---
     (24, "canister",  "an airtight coffee storage canister, single container"),
