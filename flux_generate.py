@@ -190,12 +190,17 @@ def main() -> int:
     if args.ref:
         ref_images = []
         for r in args.ref:
-            ref_path = Path(r).expanduser()
-            if not ref_path.is_file():
-                print(f"参照画像が見つかりません: {ref_path}", file=sys.stderr)
-                return 1
-            ref_images.append(base64.b64encode(ref_path.read_bytes()).decode("ascii"))
-            print(f"参照画像を使用: {ref_path}")
+            if r.startswith("http://") or r.startswith("https://"):
+                # FLUX.2 は input_image にURLを直接渡せる(DL不要)。
+                ref_images.append(r)
+                print(f"参照画像URL: {r}")
+            else:
+                ref_path = Path(r).expanduser()
+                if not ref_path.is_file():
+                    print(f"参照画像が見つかりません: {ref_path}", file=sys.stderr)
+                    return 1
+                ref_images.append(base64.b64encode(ref_path.read_bytes()).decode("ascii"))
+                print(f"参照画像を使用: {ref_path}")
 
     targets = EQUIPMENT
     if args.only:
