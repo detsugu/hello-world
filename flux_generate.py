@@ -92,7 +92,7 @@ EQUIPMENT = [
     (17, "kettle",           "a gooseneck pour-over coffee kettle with a long thin spout"),
     (18, "scale",            "a flat digital coffee scale with built-in timer display"),
     (19, "server",           "a clear glass coffee server carafe with measurement markings, single object"),
-    (20, "paper_filter",     "a small stack of cone-shaped V60-style white paper coffee filters, each a flat folded paper cone with the characteristic crimped pleated zig-zag pressed seam running along one diagonal edge and across the bottom tip, unbleached off-white paper, several filters nested and fanned slightly so the layered crimped edges are clearly visible"),
+    (20, "paper_filter",     "a neat stack of round fluted wavy-walled paper coffee filters in the Kalita wave style, each filter a flat-bottom cup with evenly corrugated pleated rippling sidewalls, unbleached off-white paper, several filters nested together; just the bare stack of fluted filters alone, with no outer paper wrapper, sleeve or cone wrapped around them"),
     # --- 追加(今回作成): エスプレッソ系(3点) ---
     (21, "espresso_machine",   "a home semi-automatic espresso machine with a portafilter attached"),
     (22, "portable_espresso",  "a compact handheld manual portable espresso maker, hand-press type"),
